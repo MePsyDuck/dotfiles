@@ -1,0 +1,6 @@
+#!/bin/bash
+# Reload changes using source ~/.bash_profile
+# Why add everything in .bashrc and import it here : https://stackoverflow.com/a/23233967
+
+[[ -r ~/.bashrc ]] && . ~/.bashrc
+

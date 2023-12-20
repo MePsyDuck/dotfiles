@@ -1,0 +1,21 @@
+#!/bin/bash
+
+PATH="${PATH}:/usr/local/mysql/bin"
+
+# Pyenv
+PATH="${PATH}:${PYENV_ROOT}/bin"
+
+# Chezmoi
+PATH="${PATH}:${HOME}/bin"
+
+# GNU utilities export
+PATH="${PATH}:/opt/homebrew/opt/coreutils/libexec/gnubin"
+PATH="${PATH}:/opt/homebrew/opt/findutils/libexec/gnubin"
+PATH="${PATH}:/opt/homebrew/opt/gnu-tar/libexec/gnubin"
+PATH="${PATH}:/opt/homebrew/opt/gnu-indent/libexec/gnubin"
+PATH="${PATH}:/opt/homebrew/opt/grep/libexec/gnubin"
+
+# MySQL
+PATH="${PATH}:/opt/homebrew/opt/mysql@5.7/bin"
+
+export PATH

@@ -1,0 +1,32 @@
+#!/bin/bash
+
+for file in ${HOME}/.system/.{exports,path,aliases,functions,extras}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+unset file;
+
+# Brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Cargo
+# . "$HOME/.cargo/env"
+
+# fasd
+eval "$(fasd --init auto)"
+
+# mmm
+export NNN_OPTS="C"
+export NNN_USE_PREVIEW="timg"
+
+# linuxify
+. ~/.linuxify
+
+# Pyenv
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# sdkman
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

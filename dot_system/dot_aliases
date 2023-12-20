@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Custom shell script shortcuts
+
+# exa shortcuts
+alias l='exa --icons'
+alias ll='l -l'
+alias la='l -ah'
+alias lt='l --tree'
+alias llt='ll --tree'
+alias lla='ll -ah'
+alias llta='llt -ah'
+
+# command shorthands
+alias cm='chezmoi'
+alias bat='bat --paging=never -pp --style=plain --theme=TwoDark'
+
+# Misc
+alias rquote='fortune | cowsay -f $(cowsay -l | tail -n +2 | tr ' ' '\n' | gshuf -n 1) | lolcat'
+
+# Kitty
+alias cb='kitty + kitten clipboard'

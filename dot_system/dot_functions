@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# Selects db with second highest number in between db___db.
+function mysqle() {
+    command mysql -uroot -e $1
+}
+# Utility
+function findall() {
+    if [[ $@ != "" ]]; then
+        command find / -iname "$@" 2>/dev/null
+    else
+        command echo "command error: findall <string>"
+    fi
+}
+
+function findin() {
+    if [[ $@ != "" ]]; then
+        command find . -iname "$@" 2>/dev/null
+    else
+        command echo "command error: findin <string>"
+    fi
+}
+
+function nuke() {
+    rm -rf $@
+}
+
+# https://unix.stackexchange.com/a/9124
+function mkcd() {
+    case "$1" in
+        */..|*/../) cd -- "$1";; # that doesn't make any sense unless the directory already exists
+        /*/../*) (cd "${1%/../*}/.." && mkdir -p "./${1##*/../}") && cd -- "$1";;
+        /*) mkdir -p "$1" && cd "$1";;
+        */../*) (cd "./${1%/../*}/.." && mkdir -p "./${1##*/../}") && cd "./$1";;
+        ../*) (cd .. && mkdir -p "${1#.}") && cd "$1";;
+        *) mkdir -p "./$1" && cd "./$1";;
+    esac
+}
+
+function display_octozen() {
+    local command="curl -s https://api.github.com/octocat"
+    local zen=$(eval ${command})
+    if [ "$zen" != "" ]; then
+        printf '%s\n' ${zen}
+    fi
+}
+
+function ssh_with_pass() {
+    export SSHPASS=`pass ssh/$1`
+    sshpass -e ssh $1
+    unset SSHPASS
+}
+
+# $1 = type; 0 - both, 1 - tab, 2 - title
+# rest = text
+function setTerminalText () {
+    # echo works in bash & zsh
+    local mode=$1 ; shift
+    echo -ne "\033]$mode;$@\007"
+}
+function stt_both  () { setTerminalText 0 $@; }
+function stt_tab   () { setTerminalText 1 $@; }
+function stt_title () { setTerminalText 2 $@; }
+
+function fze() {
+    files=("${(@f)$(fzf -m)}")
+    (( ${#files} )) || return
+    ${VISUAL:-code} ${files}
+}
+
+function fzd() {
+    files=("${(@f)$(fzf -m)}")
+    (( ${#files} )) || return
+    bat ${files}
+}
