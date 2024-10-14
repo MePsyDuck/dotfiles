@@ -1,6 +1,6 @@
 [user]
-	name = 
-	email = 
+	name = Sumeet Swain
+	email = sumit231996@gmail.com
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
