@@ -1,32 +1,48 @@
 #!/bin/bash
 
+# Load custom system files if they exist
 for file in ${HOME}/.system/.{exports,path,aliases,functions,extras}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
 
-# Brew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# Check for macOS (Darwin)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # Brew (Homebrew) setup for macOS
+    if command -v brew &>/dev/null; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
 
-# Cargo
+    # Linuxify setup for macOS
+    if [[ -f "$HOME/.linuxify" ]]; then
+        . "$HOME/.linuxify"
+    fi
+else
+    # Assuming Linux system
+    if [[ -f "$HOME/.linuxify" ]]; then
+        . "$HOME/.linuxify"
+    fi
+fi
+
+# Cargo (optional, commented out)
 # . "$HOME/.cargo/env"
 
 # fasd
-eval "$(fasd --init auto)"
+if command -v fasd &>/dev/null; then
+    eval "$(fasd --init auto)"
+fi
 
-# mmm
+# nnn
 export NNN_OPTS="C"
 export NNN_USE_PREVIEW="timg"
 
-# linuxify
-# . ~/.linuxify
-
 # Pyenv
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if command -v pyenv &>/dev/null; then
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
 
-# sdkman
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# sdkman (must be at the end)
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
