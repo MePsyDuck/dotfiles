@@ -3,7 +3,7 @@
 # Custom shell script shortcuts
 
 # exa shortcuts
-alias l='exa --icons'
+alias l='eza --icons'
 alias ll='l -l'
 alias la='l -ah'
 alias lt='l --tree'
