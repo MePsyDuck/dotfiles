@@ -19,7 +19,7 @@ export NNN_OPTS="C"
 export NNN_USE_PREVIEW="timg"
 
 # linuxify
-. ~/.linuxify
+# . ~/.linuxify
 
 # Pyenv
 eval "$(pyenv init --path)"
