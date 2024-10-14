@@ -17,20 +17,13 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     if [[ -f "$HOME/.linuxify" ]]; then
         . "$HOME/.linuxify"
     fi
-else
-    # Assuming Linux system
-    if [[ -f "$HOME/.linuxify" ]]; then
-        . "$HOME/.linuxify"
-    fi
 fi
 
 # Cargo (optional, commented out)
 # . "$HOME/.cargo/env"
 
-# fasd
-if command -v fasd &>/dev/null; then
-    eval "$(fasd --init auto)"
-fi
+# zoxide
+eval "$(zoxide init zsh)"
 
 # nnn
 export NNN_OPTS="C"
