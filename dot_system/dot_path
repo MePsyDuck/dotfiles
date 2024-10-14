@@ -18,4 +18,6 @@ PATH="${PATH}:/opt/homebrew/opt/grep/libexec/gnubin"
 # MySQL
 PATH="${PATH}:/opt/homebrew/opt/mysql@5.7/bin"
 
+PATH="${PATH}:/home/sumit/.local/bin"
+
 export PATH
